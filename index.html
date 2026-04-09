@@ -270,6 +270,11 @@ function scrollToBottom() {
     behavior: 'smooth'
   });
 }
+window.addEventListener("resize", () => {
+  setTimeout(() => {
+    theater.scrollTop = theater.scrollHeight;
+  }, 100);
+});
 
 function addMessage(sender, text) {
   const isIgris = sender === "igris";
