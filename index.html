@@ -29,6 +29,21 @@
       overflow: hidden; /* Lock the screen */
     }
 
+    :root {
+  --vh: 1vh;
+}
+
+/* Fix mobile keyboard + viewport jumping */
+.app-container {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+/* Prevent input being hidden by keyboard */
+.input-area {
+  position: relative;
+  z-index: 10;
+}
+
     /* Animated Shadow Background */
     .shadow-background {
       position: fixed;
@@ -259,9 +274,22 @@ const energyLabel = document.getElementById("energy");
 
 // 1. AUTO-SCROLL WHEN TYPING (For Mobile Keyboard)
 inputField.addEventListener("focus", () => {
-  // Delay slightly to wait for the keyboard to slide up
-  setTimeout(scrollToBottom, 300);
+  setTimeout(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+    theater.scrollTop = theater.scrollHeight;
+  }, 300);
 });
+function updateVH() {
+  document.documentElement.style.setProperty(
+    '--vh',
+    `${window.innerHeight * 0.01}px`
+  );
+}
+
+updateVH();
+window.addEventListener("resize", updateVH);
+window.addEventListener("orientationchange", updateVH);
+
 
 // 2. SCROLL LOGIC
 function scrollToBottom() {
