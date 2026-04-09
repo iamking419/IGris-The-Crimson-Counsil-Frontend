@@ -301,7 +301,7 @@ async function execute() {
   energyLabel.style.opacity = "0.4";
 
   try {
-    const res = await fetch("igris-the-crimson-counsil-api-production.up.railway.app/igris", {
+    const res = await fetch("https://igris-the-crimson-counsil-api-production.up.railway.app/igris", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ input: text })
